@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            call的第一个参数传入不同类型，得到改变的this指向是不同的
+                - 如果改变的this被指向了 null或者undefined，则this指向是window
+                - 如果改变的this被指向了 基本包装类型 则this指向其包装对象
+                - 如果改变的this被指向了一个对象类型，则this正常指向该对象
+        
+        */
+        function fn() {
+            console.log(this);
+        }
+        //null undefined
+        fn.call(null) //window
+        fn.call(undefined) //window
+
+        //基本包装对象
+        fn.call(1) //Number{1}
+        fn.call("a") //String(a)
+        fn.call(true) //Boolean(true)
+
+        //对象类型
+        fn.call({}) //{}
+        fn.call(function () {}) //f
+        fn.call(/\s/gi) //正则
+        fn.call(new Date()) //时间
+    </script>
+</body>
+
+</html>

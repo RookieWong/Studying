@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 回调函数一般指的是：一个函数A被作为参数传递给另一个函数B，回调函数A在B中被调用
+
+        function callMe() {
+            console.log("我到家了");
+        }
+
+        function goHome(fn) {
+            console.log("...回家路上");
+
+            fn()
+        }
+
+        //送你女朋友上车
+        goHome(callMe);
+
+
+        //回调函数
+        /* 
+            回调函数的另一种出现情况：
+                - 函数是你创建的
+                - 函数你没有调用
+                - 函数最终调用了
+
+            常见的回调函数：
+                - 定时器回调函数
+                - 事件回调函数
+                - ajax回调函数
+        
+        */
+
+        setInterval(function () {
+
+        }, 100)
+
+        document.onclick = function () {
+
+        }
+    </script>
+</body>
+
+</html>

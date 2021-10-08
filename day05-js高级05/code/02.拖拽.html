@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        position: fixed;
+        left: 0;
+        top: 0;
+      }
+
+      #box1 {
+        background-color: rgb(0, 255, 55);
+      }
+
+      #box2 {
+        background-color: rgb(10, 151, 85);
+      }
+
+      #box3 {
+        background-color: rgb(0, 110, 255);
+      }
+
+      #box4 {
+        background-color: rgb(255, 0, 170);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+    <div id="box4"></div>
+    <script>
+      function Drag(id) {
+        //这里的this才是指向实例化对象
+        var _this = this;
+
+        _this.oBox = document.getElementById(id);
+        //给当前元素绑定鼠标按下事件
+        _this.oBox.onmousedown = function (e) {
+          //把mousedown以后执行的核心代码 放在原型对象上的一个方法中
+          //当事件发生的时候调用这个方法
+          _this.down(e);
+        };
+      }
+
+      Drag.prototype.down = function (e) {
+        console.log("Drag.prototype.down this", this);
+        e.preventDefault();
+        //原型对象中的this也是指向实例化对象
+        var _this = this;
+        console.log("down");
+        //获取鼠标到元素边缘的距离
+        //把这个变量放在实例化对象上，这样在其他位置可以直接获取
+        _this.mouseToEle = {
+          left: e.offsetX,
+          top: e.offsetY,
+        };
+
+        //down中绑定两个事件
+        document.onmousemove = function (e) {
+          _this.move(e);
+        };
+        document.onmouseup = function () {
+          _this.up();
+        };
+      };
+
+      Drag.prototype.move = function (e) {
+        e.preventDefault();
+        console.log("Drag.prototype.move this", this);
+        var _this = this;
+        //获取鼠标到视口的距离
+        var mouseToView = {
+          left: e.clientX,
+          top: e.clientY,
+        };
+
+        //计算结果
+        var boxLocation = {
+          x: mouseToView.left - _this.mouseToEle.left,
+          y: mouseToView.top - _this.mouseToEle.top,
+        };
+        //赋值
+        _this.oBox.style.left = boxLocation.x + "px";
+        _this.oBox.style.top = boxLocation.y + "px";
+      };
+
+      Drag.prototype.up = function () {
+        document.onmousemove = null;
+        document.onmouseup = null;
+      };
+
+      new Drag("box1");
+      new Drag("box2");
+      new Drag("box3");
+      new Drag("box4");
+    </script>
+  </body>
+</html>

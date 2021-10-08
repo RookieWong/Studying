@@ -1,0 +1,15 @@
+.mixin(@a, @b) {
+    background-color: @a;
+    width: 1000px;
+}
+
+.mixin(@a) {
+    background-color: @a;
+    width: 100px;
+}
+
+.box {
+    border: 1px solid #000;
+    height: 100px;
+    .mixin(red);
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            apply和call类似：
+                - 区别是给被执行的函数传递实参时，apply是把所有的实参放在一个数组中(如果只有一个参数，也要放在数组中)
+        
+        
+        */
+        console.dir(Function.prototype);
+
+        var o = {
+            name: "laowang"
+        }
+
+        function fn(a, b) {
+            console.log("this", this);
+            console.log("a+b", a + b);
+            return "hello";
+        }
+
+        var result = fn.apply(o, [1, 2]);
+        console.log("result", result);
+
+
+        //练习：让伪数组可以使用forEach
+        var likeArray = {
+            0: "a",
+            1: "b",
+            2: "c",
+            3: "d",
+            length: 4
+        }
+        Array.prototype.forEach.apply(likeArray, [function (item, index) {
+            console.log(item, index);
+        }])
+    </script>
+</body>
+
+</html>

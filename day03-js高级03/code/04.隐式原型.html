@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            __proto__:
+                - 每一个对象都有一个__proto__属性，被称作为隐式原型
+                - 每一个函数都有一个prototype属性，被称作为显示原型
+                - 对象的隐式原型 指向其 所造构造函数的显示原型
+
+                - 隐式原型__proto__是在对象创建的时候自动添加上去，当访问这个对象不存在的属性或方法的时候，那么会沿着__proto__去这个对象的构造函数的原型对象上寻找
+
+                - 当给对象设置属性的时候，将会直接设置给当前的对象，不会沿着__proto__去查找
+        
+        
+        */
+
+
+
+        //Person构造函数
+        function Person() {
+
+        }
+        //给Person的原型对象添加属性或方法
+        Person.prototype.do = function () {
+            console.log("do");
+        }
+
+        //实例化构造函数
+        var p1 = new Person();
+        p1.do = function () {
+            console.log("p1的do");
+        }
+        //当访问p1的do的时候，p1身上是没有的，则会沿着隐式原型找到Person.prototype上，从而可以执行
+        p1.do();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+
+</head>
+
+<body>
+    <ul id="box">
+        <li>
+            <span>span</span>
+            <em>em <var>var </var></em>
+        </li>
+        <li>
+            <span>span</span>
+            <em>em <var>var </var></em>
+        </li>
+        <li>
+            <span>span</span>
+            <em>em <var>var </var></em>
+        </li>
+        <li>
+            <span>span</span>
+            <em>em <var>var </var></em>
+        </li>
+    </ul>
+
+
+    <!-- <span>span</span>
+    <em>em <var>var </var></em> -->
+    <script>
+        /* var oBox = document.getElementById('box');
+        oBox.onclick = function (e) {
+            if (e.target.nodeName === "LI") {
+                e.target.style.background = "red";
+            }
+        } */
+
+
+
+        $("#box").on("click", "li", function () {
+            $(this).css("background", "red")
+        })
+
+
+        
+    </script>
+</body>
+
+</html>

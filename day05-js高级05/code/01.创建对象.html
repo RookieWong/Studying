@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            基本的方式创建对象
+            缺点：代码冗余
+        
+        */
+        /* var student1 = {
+            name: "laozhang",
+            sex: "男",
+            age: 18
+        }
+        student1.study = function () {
+            console.log("js");
+        }
+
+        var student2 = {
+            name: "laozhang1",
+            sex: "男",
+            age: 18
+        }
+        student2.study = function () {
+            console.log("js");
+        } */
+
+
+
+        /* 
+            工厂模式：
+                缺点：无法辨别当前的对象是那一类
+        
+        */
+
+        /* function students(name, age, sex) {
+            var obj = {};
+            obj.name = name;
+            obj.age = age;
+            obj.sex = sex;
+            obj.study = function () {
+                console.log("js");
+            }
+            return obj;
+        }
+        var s1 = students("laowang", 18, "男")
+        var s2 = students("laozhang", 19, "男")
+        var s3 = students("laohuang", 20, "男")
+
+        console.log(s3.constructor); //Object */
+
+
+        /* 
+            构造函数的方式创建:
+                构造函数一定是被new调用的，而new操作符本身可以返回一个对象，所以在构造函数中不需要新创建一个对象，构造函数的this直接指向当前new后返回的对象
+
+                缺点：方法不能共享
+        
+        
+        */
+        function Student(name, age, sex) {
+            //构造函数的this直接指向实例化对象
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+            this.study = function () {
+                console.log("js");
+            }
+        }
+
+        var s1 = new Student("laohuang", 20, "男");
+        var s2 = new Student("laowang", 18, "男");
+        console.log(s1, s2);
+        console.log(s1.constructor);
+
+        console.log(s1.study === s2.study);
+
+        
+        /* 
+            构造函数+原型方式
+        
+        */
+
+        function Student(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        Student.prototype.study = function () {
+            //原型方法中的this指向实例化对象
+            console.log("js");
+        }
+
+        var s1 = new Student("laowang1", 18, "nan")
+        var s2 = new Student("laowang2", 28, "nan")
+        var s3 = new Student("laowang3", 38, "nan")
+
+        console.log(s1.study === s2.study); //true
+    </script>
+</body>
+
+</html>

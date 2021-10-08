@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function myInstanceof(A, B) {
+            //首先获取B的原型对象
+            var _B = B.prototype;
+
+            //获取A的隐式原型
+            var _A = A.__proto__;
+
+            //判断第一次获取的A的隐式原型是否和B的原型对象一致
+            while (_A != _B) {
+                //如果不一致，则继续沿着A的原型链获取
+                _A = _A.__proto__;
+
+                //但是要判断 如果_A已经达到原型链的终点 也就是null，则直接returnfalse
+                if (!_A) {
+                    return false;
+                }
+            }
+
+            //如果_A和_B一致，则退出while 直接返回true即可
+            return true;
+        }
+
+
+        console.log(myInstanceof([1, 2], Array));
+
+
+
+
+
+
+
+        /* var user = prompt("账号名");
+        var pass = prompt("密码");
+
+        while (user !== "laoli" || pass !== "123") {
+            user = prompt("账号名");
+            pass = prompt("密码");
+        }
+
+        alert("成功") */
+    </script>
+</body>
+
+</html>

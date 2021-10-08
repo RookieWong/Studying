@@ -1,0 +1,11 @@
+@baseUrl: "http://lipeihua.vip/images/";
+@size: 30;
+
+#box {
+    //当想要让变量和字符串拼接的时候，使用插值语法
+    background: url("@{baseUrl}01.jpg");
+    //把字符串转义为css识别的语法（取掉字符串）
+    font-size:~"@{size}px";
+
+    width: ceil(1000px / 3);
+}

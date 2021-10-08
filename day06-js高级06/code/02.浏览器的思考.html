@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log("start");
+
+
+        //计时器计时后，并不一定按照计时的延迟去执行，因为要等到同步代码执行完毕
+        // console.time("time")
+        // setTimeout(function () {
+        //     console.log("center");
+
+        //     console.timeEnd("time");
+        // }, 2000)
+
+
+        // 大量运算
+        var sum = 0;
+        for (var i = 0; i < 1000000000; i++) {
+            sum += Math.sqrt(i);
+        }
+
+        console.log("end");
+    </script>
+</body>
+
+</html>

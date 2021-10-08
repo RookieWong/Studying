@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Student(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+            return {}
+        }
+        Student.prototype.study = function () {
+            console.log("js");
+        }
+        /* 
+            分析new做了什么？
+                - new会让函数返回一个对象
+                - 把函数的this指向new创建的对象
+                - 把new创建的对象的原型链修改为指向当前函数的原型对象
+                - 如果函数return的是一个对象类型值，则这个函数被实例化后返回的就是这个对象，而不是new创建的对象
+        */
+
+        //手写new
+        function myNew(constr) {
+
+            //1.创建一个对象
+            var o = {};
+            // 拿到给被调用函数传递的实参
+            var arg = Array.from(arguments).slice(1)
+            // 2.调用构造函数，把构造函数的this指向当前的对象  并向构造函数传参
+            var result = constr.apply(o, arg); //result就是构造函数constr的返回值
+            // 3.修改o的原型链，让o的隐式原型指向构造函数的显式原型，这样o就可以访问构造函数原型对象上的方法
+            o.__proto__ = constr.prototype;
+
+            //判断构造函数的返回值是不是对象类型
+            // console.log(result);
+            if (typeof result === 'object' && result !== null || typeof result === "function") {
+                //当result是对象类型的时候，返回这个result 而不能返回o
+                return result;
+            }
+
+            return o;
+
+        }
+
+        var s1 = myNew(Student, "laowang", 18, "nan")
+        console.log(s1); //{name: 'laowang', age: 18, sex: 'nan'}
+    </script>
+</body>
+
+</html>

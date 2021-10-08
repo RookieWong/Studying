@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //判断变量中保存的是什么？
+        /* 
+            var a;
+            a = 'abc' //保存的是一个值
+            a = function () { //保存的是一个地址
+
+            }
+
+            var b = true //b保存的是一个值
+            a = b //a保存的是一个值
+            b = [] //保存的是一个地址
+            a = b //a保存的是一个地址
+        */
+
+
+        //test2
+        /* var o1 = {
+            m: 1
+        }
+        var o2 = o1;
+        o2.m = 2;
+        console.log(o1.m, o1 === o2) //2 true */
+
+        //test3
+        /* var o3 = {
+            m: 3
+        }
+        var o4 = o3
+        o3 = {
+            m: 4
+        }
+        console.log(o4.m, o4 === o3) //3 false */
+
+
+
+
+        //test4
+        /* var o5 = {
+            m: 5
+        };
+        var o6 = o5;
+
+        function fn(obj) {
+            obj = {
+                m: 6
+            };
+        }
+        fn(o5)
+        console.log(o5.m, o6.m, o6 === o5) //5 5 true */
+
+        //test5
+        var o5 = {
+            m: 5
+        };
+        var o6 = o5;
+
+        function fn(obj) {
+            obj.m = 6
+        }
+        fn(o5)
+        console.log(o5.m, o6.m, o6 === o5) //6 6 true
+    </script>
+</body>
+
+</html>

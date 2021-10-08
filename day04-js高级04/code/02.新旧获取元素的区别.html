@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">新增</button>
+    <ul id="box">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <script>
+        var oBtn = document.getElementById('btn');
+        var oBox = document.getElementById('box');
+
+        var oLis = oBox.getElementsByTagName("li");
+        var oLis1 = document.querySelectorAll('#box li');
+        /* 
+            新旧获取元素的区别：
+                旧方法：获取的是HTMLConllection对象，是动态的（监听关系）
+                新方法：获取的是NodeList对象，是静态的，拥有forEach方法
+        
+        */
+
+        //点击btn 添加一个新的li
+        oLis1.forEach(element => {
+            console.log(element);
+        });
+
+
+        oBtn.onclick = function () {
+            var oNewLi = document.createElement("li");
+            oNewLi.textContent = "新li";
+            oBox.appendChild(oNewLi);
+
+            console.log(oLis);
+        }
+    </script>
+</body>
+
+</html>

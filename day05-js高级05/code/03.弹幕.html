@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .videoArea {
+            width: 800px;
+            height: 400px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video {
+            width: 800px;
+            height: 400px;
+            background-color: antiquewhite;
+        }
+
+        .barrage div {
+            position: absolute;
+            left: 800px;
+        }
+
+
+        @keyframes move {
+            0% {
+                left: 800px;
+            }
+
+            100% {
+                left: -100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <div class="videoArea">
+            <div class="barrage">
+
+            </div>
+            <div class="video"></div>
+        </div>
+    </div>
+
+    <div>
+        <input type="text" id="ipt">
+        <button id="btn">发布</button>
+    </div>
+    <script>
+        var oBarrage = document.querySelector('.barrage');
+
+        function Barrage(msg) {
+            var _this = this;
+
+            //获取弹幕的内容
+            _this.msg = msg;
+
+            //调用创建一个新元素的方法
+            _this.create();
+        }
+
+        //创建元素
+        Barrage.prototype.create = function () {
+            var _this = this;
+
+            //创建一个元素
+            _this.newDiv = document.createElement("div")
+            _this.newDiv.textContent = _this.msg;
+            //添加一个字号的样式
+            _this.newDiv.style.fontSize = _this.size() + "px";
+            //添加一个随机颜色
+            _this.newDiv.style.color = _this.color();
+            //添加一个随机的位置
+            _this.newDiv.style.top = _this.location() + "px";
+
+            //插入元素
+            // console.log(_this.newDiv);
+            oBarrage.appendChild(_this.newDiv)
+
+            //控制元素移动
+            _this.move();
+
+
+        }
+
+        //封装一个生成随机数的方法
+        Barrage.prototype.random = function (a, b) {
+            return Math.floor(Math.random() * (b - a) + a)
+        }
+
+        //随机颜色
+        Barrage.prototype.color = function () {
+            var r = this.random(0, 256);
+            var g = this.random(0, 256);
+            var b = this.random(0, 256);
+            return 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+
+        //随机字号
+        Barrage.prototype.size = function () {
+            //生成12-40的随机数
+            return this.random(12, 40)
+        }
+
+        Barrage.prototype.location = function () {
+            //生成0-360的top值
+            return this.random(0, 360)
+        }
+
+        Barrage.prototype.time = function () {
+            //生成1-5s的时间
+            return this.random(1, 6)
+        }
+        Barrage.prototype.move = function () {
+            var _this = this;
+            console.log(_this.newDiv);
+            //获取随机事件
+            var randomTime = _this.time();
+            _this.newDiv.style.animation = "move " + randomTime + "s linear";
+
+            //当动画执行完成以后删除当前的元素
+            setTimeout(() => {
+                _this.newDiv.remove();
+            }, randomTime * 1000);
+        }
+
+
+
+
+        //发布弹幕
+        var oBtn = document.getElementById('btn')
+        var oIpt = document.getElementById('ipt')
+        oBtn.onclick = function () {
+            var msg = oIpt.value;
+            new Barrage(msg);
+        }
+    </script>
+</body>
+
+</html>

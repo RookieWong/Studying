@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            检测数据的具体类型：
+                - typeof
+                    - 可以检测出来的类型是：undefined,number,string,boolean,function
+
+                - ===
+                    - 因为null和undefined类型，有且只有一个一个值，所以可以全等进行判断，只有数据类型相等则可以确认是undefined或null
+                    - 可以检测null 和 undefined
+
+                - instanceof/constructor
+                    - instanceof:
+                        - 只能判断对象类型中的具体类型
+                        - A instanceof B:检测的B的原型对象是否在A的原型链上
+                    - constructor
+                        - 构造器属性，可以得到当前数据的构造器
+                        - 可以和对应的构造函数进行比较判断
+
+                - Object的toString方法
+                    Object.prototype.toString.call(o).toLowerCase().slice(8, -1)
+
+        
+        */
+        var a;
+        var b = null;
+        console.log(a === undefined); //只要是true，则a是undefined
+        console.log(b === null); //只要是true 则b是null
+
+
+        //instanceof
+        console.log([] instanceof Array); //true
+        console.log([] instanceof Object); //true 所以不一定能精确判断
+        var num = 1;
+        console.log(num instanceof Number); //false:instanceof不能检测基本类型值
+        //constructor
+        console.log([].constructor === Array); //true
+        console.log(num.constructor === Number); //true
+
+        //toString
+        console.log([].toString()); //''
+        console.log("123".toString()); //'123'
+        console.log({}.toString()); //[object Object]
+        console.log((function () {}).toString()); //'function () {}'
+
+
+        //通过Object的原型对象拿到它的toString方法
+        console.log(Object.prototype.toString.call([])) //[object Array]
+        console.log(Object.prototype.toString.call(function () {})) //[object Function]
+        console.log(Object.prototype.toString.call(123)) //'[object Number]'
+        console.log(Object.prototype.toString.call('123')) //[object String]
+        console.log(Object.prototype.toString.call(null)) //[object Null]
+        console.log(Object.prototype.toString.call(undefined)) //[object Undefined]
+        console.log(Object.prototype.toString.call(true)) //[object Boolean]
+        console.log(Object.prototype.toString.call(/\s/gi)) //[object RegExp]
+        console.log(Object.prototype.toString.call(new Date())) //[object Date]
+
+        //完整写法
+        console.log(Object.prototype.toString.call('123').toLowerCase().slice(8, -1))
+
+        //封装一个检测数据类型的函数
+        function checkType(o) {
+            return Object.prototype.toString.call(o).toLowerCase().slice(8, -1);
+        }
+        console.log(checkType("123"));
+        console.log(checkType(1));
+        console.log(checkType([]));
+
+
+
+
+        //test
+        var o = {};
+        o.a = function () {
+            //想要拿到o进行操作
+            //可以通过this来拿
+        }
+        o.a()
+    </script>
+</body>
+
+</html>

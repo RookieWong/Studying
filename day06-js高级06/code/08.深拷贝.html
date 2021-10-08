@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function checkType(o) {
+            return Object.prototype.toString.call(o).toLowerCase().slice(8, -1);
+        }
+
+        //深拷贝
+        function deepClone(o) {
+            //判断当前拷贝的是对象或者数组
+            if (checkType(o) === 'object') {
+                var result = {};
+            } else if (checkType(o) === 'array') {
+                var result = [];
+            } else {
+                //如果不是对象和数组，则不进行拷贝，直接把当前值返回即可
+                return o;
+            }
+
+            //如果当前的值是对象或者数组 则开始拷贝
+            for (var key in o) {
+                result[key] = deepClone(o[key]);
+            }
+
+            return result;
+        }
+
+
+        //使用
+        var o1 = {
+            name: "laowang",
+            age: 18,
+            score: [100, 90, 80]
+        }
+        var o2 = deepClone(o1)
+        console.log(o2);
+        console.log(o2.score === o1.score); //深拷贝
+    </script>
+</body>
+
+</html>

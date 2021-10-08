@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+
+        // 1.已知一个字符串："abfranhjabbfdbbfebabbebwqbbb";求字符串中出现最多的字符和出现的次数和第一次出现的位置
+        /*  var str = 'abfranhjabbfdbbfebabbebwqbbb';
+         console.log(str.split("")) //转数组
+         //初始化一个对象，用来计数
+         var o = {};
+         str.split("").forEach(function (item, index) {
+             //item进来之后 判断对象中的key 有没有当前的值，如果有，则key的值累加，否则新增一个key 值为1
+             if (o[item]) {
+                 o[item]++;
+             } else {
+                 o[item] = 1;
+             }
+         })
+         console.log(o);
+
+         //初始化一个值
+         var base = 0;
+         var _key = null;
+         //判断对象中哪一个key的值最大
+         for (var key in o) {
+             if (o[key] > base) {
+                 //base记录的是次数
+                 base = o[key];
+                 // _key记录的是当前的值
+                 _key = key;
+             }
+         }
+         console.log(base, _key);
+
+         console.log("第一次出现的位置是：", str.indexOf(_key)); */
+
+
+
+        //2获取一个7天以后的时间
+        //方法1：
+        //得到今天的日期
+        /* var newDate = new Date().getDate();
+        //把今天的日期+7 然后设置给当前的事件
+        var now = new Date();
+        now.setDate(newDate + 7);
+        console.log(now); */
+        // new Date().setDate(new Date().getDate() + 7)
+
+        //方法2
+        // var zhongqiu = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
+
+
+
+
+        /* 3. 已知一个url地址 'http://www.baidu.com?user=laoli&pass=123&score=100';
+        从地址中得到查询字符串， 并以键值对的形式组成一个对象， 如下 {
+            user: laoli,
+            pass: 123,
+            score: 100
+        } */
+        /* var url = 'http://www.baidu.com?user=laoli&pass=123&score=100';
+        // url.split("?")//['http://www.baidu.com','user=laoli&pass=123&score=100']
+        // url.split("?")[1].split("&")//['user=laoli','pass=123','score=100']
+
+        //初始化一个对象
+        var o = {};
+        //对字符串的操作
+        url.split("?")[1].split("&").forEach(function (item, index) {
+            //每次进来的是查字符串的一组键值对 'user=laoli'
+            var mesArr = item.split("="); //['user','laoli']
+            o[mesArr[0]] = mesArr[1];
+
+            // var key = mesArr[0];
+            // var value = mesArr[1];
+            // o[key] = value;
+
+        })
+        console.log(o); */
+
+
+        /* 
+            4.已知一个查询字符串组成的对象{
+                user:laoli,
+                pass:123,
+                score:100
+            }
+            还已知一个地址http://www.baidu.com，
+            得到完整的url地址：'http://www.baidu.com?user=laoli&pass=123&score=100'
+
+        */
+        /* var o = {
+            user: "laoli",
+            pass: 123,
+            score: 100
+        }
+        var baseUrl = 'http://www.baidu.com?';
+
+        for (var key in o) {
+            // key和o[key] 
+            // key + "=" + o[key] + "&" //'user=laoli&'
+            baseUrl += key + "=" + o[key] + "&";
+        }
+        console.log(baseUrl.slice(0, -1)); */
+
+
+
+
+
+        //forEach遍历数组
+        /*  var arr = ["a", "b", "c", "d"];
+         arr.forEach(function (item, index, array) {
+
+             // item是当次进入函数的值
+             // index是当前值的下标
+             // array是当前函数的引用
+
+             console.log(item, index, array);
+
+             if (item === "c") {
+                 return;
+             }
+
+             //XXXX
+         }) */
+
+
+        //字符串翻转
+        /* var str = "abcd";
+        var _str = str.split("").reverse().join("");
+        console.log(_str); */
+
+
+        //设置中秋的时间
+        /* var zhongqiu1 = new Date("2021-9-19 8:0:0");
+        var zhongqiu2 = new Date(2021, 8, 19, 8, 0, 0);
+        var zhongqiu3 = new Date(123141231325125);
+        // console.log(zhongqiu1, zhongqiu2);
+        console.log(zhongqiu3); */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //test1
+
+        //注意一点：重新设置的原型对象，不会对原来已经实例化的对象原型链产生影响
+
+        var A = function () {} //构造函数A
+        A.prototype.n = 1 //构造函数A的原型对象扩展了一个属性n
+        var b = new A() //A的实例化对象b
+
+        A.prototype = { //给A换了一个新的原型对象
+            n: 2,
+            m: 3
+        }
+        var c = new A() //A的实例化对象c
+        console.log(b.n, b.m, c.n, c.m) //1 undefined 2 3
+
+
+        //test2
+        var F = function () {};
+        Object.prototype.a = function () {
+            console.log('a()')
+        };
+        Function.prototype.b = function () {
+            console.log('b()')
+        };
+        var f = new F();
+
+        F.a() //a()  F--->Function.prototype--->Object.prototype
+        F.b() //b() F--->Function.prototype
+        f.a() //a()   f--->F.prototype-->Object.prototype
+        f.b() //报错   f--->F.prototype-->Object.prototype
+    </script>
+</body>
+
+</html>

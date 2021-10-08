@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            对于对象来说：点操作符和中括号操作符:
+                - 点操作符和中括号操作符都可以被称作为 成员访问
+                - 点操作符：后边跟的内容会直接当做字符串去对象中查找
+                - 中括号操作符：中括号中的内容可以书写变量和字符串
+                - 使用策略：
+                    - 优先使用点操作符
+                    - 当key是一个变量，或者key是不规则字符串的时候，使用中括号操作符
+
+        
+        */
+        var o = {
+            name: "laowang",
+            age: 18,
+            //不规则的key
+            "Cache-Contorl": "max-age=0"
+        }
+
+        //key被变量保存
+        var key = "age";
+
+        //获取name值(点操作符是直接把点后的内容当作字符串去对象中查找的)
+        console.log(o.name);
+
+        //这样是获取不到key属性的，因为点操作符不会把后边的内容当作变量解析
+        // console.log(o.key) //undefined
+
+        //想要回去一个不规则的key的值，如果使用点操作符，可能会有语法错误
+        // console.log(o.Cache-Contorl)
+
+
+        //中括号操作符 中括号中字符串就是字符串，变量就是变量，会按照我们的书写进行解析
+        console.log(o[name]); //会把name当做变量 undefined
+        console.log(o["name"]); //"laowang"
+
+        console.log(o[key]); //直接把key当做变量解析 其实就是o["age"]
+
+        console.log(o["Cache-Contorl"]); //直接可以获取
+    </script>
+</body>
+
+</html>

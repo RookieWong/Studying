@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fun3() {
+            console.log(3);
+        }
+
+        function fun2() {
+            fun3();
+            console.log(2)
+        }
+
+        function fun1() {
+            fun2();
+            console.log(1)
+        }
+        fun1();
+        /* 
+        伪代码：
+            var stack = [];
+            //刚开始执行js就会创建全局的执行上下文 压入执行上下文栈中
+            stack = [<global>];
+            //执行fun1 创建一个fun1执行上下文
+            stack = [<global>,<fun1>];
+            //执行fun2 创建fun2执行上下文
+            stack = [<global>,<fun1>,<fun2>];
+            //执行fun3 创建fun3执行上下文
+            stack = [<global>,<fun1>,<fun2>,<fun3>];
+            stack = [<global>,<fun1>,<fun2>];
+            stack = [<global>,<fun1>];
+            stack = [<global>];
+        
+        
+        */
+
+
+        //'global begin: undefined 
+        //foo() begin 1
+        //foo() begin 2
+        //foo() begin 3
+        //foo() end 3
+        //foo() end 2
+        //foo() end 1
+        // global end: 1 
+
+        console.log('global begin: ' + i)
+        var i = 1
+        foo(1);
+
+        function foo(i) {
+            if (i == 4) {
+                return;
+            }
+            console.log('foo() begin:' + i);
+            foo(i + 1);
+            console.log('foo() end:' + i);
+        }
+        console.log('global end: ' + i)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            prototype:
+                - 每一个函数都有一个prototype属性（被称作为显式原型），指向一个对象,这个对象被称作为原型对象
+                - 原型对象的作用是：当前构造函数的实例化对象，如果自身找不到某个属性或方法的时候，会来到当前构造函数的原型对象上去找
+                - 并不是所有的函数的prototype都有意义，因为如果函数不是构造函数，则没有实例化对象，则prototype指向的原型对象是不能被访问到的
+                - 判断一个函数是不是构造函数：判断这个函数是不是new调用，如果是则这个函数是构造函数
+
+                - 原型对象默认有一个属性constructor,这个属性被称作为构造器属性
+                - constructor指向当前原型对象的构造函数，则当实例化对象调用原型对象的constructor的时候，可以直接得到自己的构造函数
+        
+        */
+
+        function fn() {
+
+        }
+        console.log(fn.prototype);
+        console.log(fn.prototype.constructor === fn); //true
+
+
+
+        //去空格
+        String.prototype.trimAll = function () {
+            var reg1 = /\s+/gi;
+            return this.replace(reg1, "");
+        }
+
+        var str = "  123  123 123 123 "
+        console.log(str.trimAll());
+    </script>
+</body>
+
+</html>

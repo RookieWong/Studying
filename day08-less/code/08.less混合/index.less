@@ -1,0 +1,61 @@
+//无参数混合
+.center() {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+//有参数混合(可以指定参数默认值)
+.center(@w: 100px, @h, @c) {
+    width: @w;
+    height: @h;
+    background-color: @c;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+#outer {
+    .center(500px, 500px, red);
+
+    #inner {
+        //指名道姓的进行传参
+        .center(@h: 300px, @c: yellow);
+
+        #con {
+            .center(100px, 100px, blue);
+        }
+    }
+}
+
+
+
+
+
+
+.box {
+
+    .clearFix();
+
+    .item {
+        float: left;
+    }
+}
+
+//清浮动的混合
+.clearFix() {
+    *zoom: 1;
+
+    &:after {
+        content: "\200B";
+        height: 0;
+        display: block;
+        clear: both;
+    }
+}

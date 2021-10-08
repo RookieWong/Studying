@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>拖拽</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        position: fixed;
+        left: 0;
+        top: 0;
+      }
+
+      #box1 {
+        background-color: rgb(0, 255, 55);
+      }
+
+      #box2 {
+        background-color: rgb(10, 151, 85);
+      }
+
+      #box3 {
+        background-color: rgb(0, 110, 255);
+      }
+
+      #box4 {
+        background-color: rgb(255, 0, 170);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+    <div id="box4"></div>
+    <script>
+      //  输入元素id,给元素添加拖拽效果
+      function Drag(id) {
+        let oBox = document.getElementById(id);
+
+        // 给元素添加鼠标按下event
+        oBox.onmousedown = (e) => {
+          // 用对象保存鼠标到元素边缘距离
+          let mouseToEle = {
+            left: e.offsetX,
+            top: e.offsetY,
+          };
+
+          // 给鼠标绑定移动event
+          document.onmousemove = (e) => {
+            e.preventDefault;
+            // 获取鼠标到视口的距离
+            let mouseToView = {
+              left: e.clientX,
+              top: e.clientY,
+            };
+
+            //计算鼠标移动结果
+            let boxLocation = {
+              x: mouseToView.left - mouseToEle.left,
+              y: mouseToView.top - mouseToEle.top,
+            };
+
+            //   给元素的位置赋值
+            oBox.style.left = boxLocation.x + "px";
+            oBox.style.top = boxLocation.y + "px";
+          };
+          document.onmouseup = () => {
+            document.onmousedown = null;
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+        };
+      }
+      //   调用拖拽函数
+      Drag("box1");
+      Drag("box2");
+      Drag("box3");
+      Drag("box4");
+    </script>
+  </body>
+</html>

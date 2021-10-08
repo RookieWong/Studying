@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //封装一个父类
+        function Person(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        Person.prototype.eat = function () {
+            console.log("醉得意");
+        }
+
+        //封装一个子类
+        function Teacher(name, age, sex, type, classRom) {
+            //1.构造函数继承
+            //实例化子类的时候，肯定也调用父类了，并且父类构造函数中的this应该是指向当前子类的this
+            Person.call(this, name, age, sex)
+            this.type = type;
+            this.classRom = classRom;
+        }
+
+        //2.原型链继承
+        // console.log(Person.prototype);
+        //不能直接把父类的原型对象赋值给子类的原型对象，否则两个都是共享的，修改了子类，父类也会被修改
+        // Teacher.prototype = Person.prototype;
+        // Person的实例化对象也可以访问到Person的prototype,可以把父类的实例化对象作为子类的原型对象
+        Teacher.prototype = new Person;
+
+        //因为我们替换了原有的子类的原型对象，所以当前的原型对象的constructor 不再指向当前的构造函数
+        // console.log(Teacher.prototype.constructor);
+        //3.修正constructor
+        Teacher.prototype.constructor = Teacher;
+        Teacher.prototype.say = function () {
+            console.log("吹牛逼");
+        }
+
+        var t1 = new Teacher("laoli", 18, "男", "HTML5", "0722")
+        console.log(t1);
+        console.log(t1.eat, t1.say);
+
+    </script>
+</body>
+
+</html>

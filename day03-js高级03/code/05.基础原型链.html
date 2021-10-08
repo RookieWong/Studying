@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            基础原型链：
+                - 所有的实例对象都有__proto__属性, 它指向的就是构造函数的原型对象，这样通过__proto__属性就形成了一个链的结构---->原型链
+
+                - 当查找一个实例对象的属性和方法的时候，都会沿着原型链去依次查找，直到找到为止，如果最终都找不到，则返回undefined
+
+                - 所有的原型链都会找到Object的原型对象上
+                
+                - 原型链的终点被设置为null(也就是Object.prototype.__proto__=null),是为了防止原型链循环
+        
+        
+        
+        */
+        //Person构造函数
+        function Person() {
+
+        }
+        //给Person的原型对象添加属性或方法
+        Person.prototype.do = function () {
+            console.log("do");
+        }
+
+        //实例化构造函数
+        var p1 = new Person();
+        p1.do = function () {
+            console.log("p1的do");
+        }
+        //当访问p1的do的时候，p1身上是没有的，则会沿着隐式原型找到Person.prototype上，从而可以执行
+        p1.do();
+        p1.hello();
+    </script>
+</body>
+
+</html>

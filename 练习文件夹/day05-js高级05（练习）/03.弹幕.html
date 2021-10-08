@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>弹幕</title>
+    <style>
+      .videoArea {
+        width: 800px;
+        height: 400px;
+        border: 1px solid #000;
+        margin: 0 auto;
+        position: relative;
+        /* overflow: hidden; */
+      }
+
+      .video {
+        width: 800px;
+        height: 400px;
+        background-color: antiquewhite;
+      }
+
+      .barrage {
+        position: absolute;
+        width: 800px;
+        height: 400px;
+      }
+
+      .barrage div {
+        /* position: absolute; */
+        left: 800px;
+        /* overflow: hidden; */
+      }
+
+      @keyframes move {
+        0% {
+          left: 800px;
+        }
+
+        100% {
+          left: -100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="outer">
+      <div class="videoArea">
+        <div class="video"></div>
+      </div>
+      <div class="barrage">
+        <div class="box1">我是弹幕</div>
+      </div>
+    </div>
+
+    <div>
+      <input type="text" id="ipt" />
+      <button id="btn">发布</button>
+    </div>
+
+    <script>
+      let oBrarage = document.querySelector(".barrage");
+
+      function Barrage(msg) {
+        // 获取弹幕内容
+        this.msg = msg;
+        this.newBox = document.createElement("div");
+        this.newBox.textContent = msg;
+        this.newBox.style.fontSize = this.rand(16, 30) + "px";
+        this.newBox.style.color =
+          "#" +
+          this.rand(0, 255).toString(16) +
+          this.rand(0, 255).toString(16) +
+          this.rand(0, 255).toString(16);
+        this.newBox.style.top = this.rand(0, 370) + "px";
+        this.newBox.style.right = this.newBox.offsetWidth + "px";
+        console.log(this.newBox.offsetWidth);
+        // this.newBox.style.width =  + "px";
+        // this.newBox.style.animation = "move 2s linear";
+        this.newBox.move = () => {
+          oBrarage.appendChild(this.newBox);
+          // 执行完毕后删除当前元素
+          setTimeout(() => {
+            // this.newBox.remove();
+          }, 2000);
+        };
+        this.newBox.move();
+      }
+
+      // 封装一个弹幕移动的原型方法
+      // Barrage.prototype.move = function() {
+      //     this.left
+      // }
+
+      Barrage.prototype.rand = function (a, b) {
+        //生成0-360的top值
+        return parseInt(Math.random() * (b - a) + a);
+      };
+
+      // 发弹幕
+      let oBtn = document.getElementById("btn");
+      let oIpt = document.getElementById("ipt");
+      oBtn.onclick = () => {
+        let msg = oIpt.value;
+        new Barrage(msg);
+      };
+    </script>
+  </body>
+</html>

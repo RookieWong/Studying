@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 400px;
+            height: 400px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        var oBox = document.getElementById('box');
+
+        //给元素绑定鼠标移动事件
+        /* //以下代码可以确认触发时间间隔特别小
+        //初始化一个上一次的时间
+        var lastTime = 0;
+        oBox.onmousemove = function () {
+            //获取本次的执行时间
+            var nowTime = Date.now();
+            //获取两次的时间差
+            console.log(nowTime - lastTime);
+            //当计算完时间差之后，需要把当次的时间赋值给lastTime，方便下一次使用
+            lastTime = nowTime;
+
+            console.log("move");
+        } */
+
+
+
+        //解决这个问题  节流基础版（我们无法控制move事件的触发频率，但是我们可以控制move事件函数内核心代码的执行频率）
+        var lastTime = 0;
+        oBox.onmousemove = function () {
+            //设置一个看门狗，如果两次的时间间隔不足100ms 则不让执行核心代码
+            var nowTime = Date.now();
+            if (nowTime - lastTime < 300) {
+                //直接退出函数，不再向下进行
+                return;
+            }
+            //如果时间间隔大于100ms 则继续向下执行
+            //如果当此进入执行了，则本次的时间 应该是下一次使用的lastTime
+            lastTime = nowTime;
+
+            //核心代码
+            console.log("move");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+//作为属性值使用
+@mainColor: red;
+
+@bdSize: 3px;
+
+@bd: @bdSize solid @mainColor;
+
+@imgUrl: "http://lipeihua.vip/01.jpg";
+
+//变量作为属性名使用,需要把变量用花括号括起来
+@bs: box-shadow;
+
+//变量作为选择器使用
+@c: .container;
+
+
+
+#box {
+    width: 200px;
+    height: 200px;
+    background-color: @mainColor;
+    // border: @bdSize solid #000;
+    border: @bd;
+}
+
+#con {
+    background: url(@imgUrl);
+    @{bs}: 0 0 0 0 yellow;
+}
+
+@{c} {
+    width: 200px;
+}
+
+
+
+//less中的变量延迟加载
+@var: 0;
+
+.class {
+    @var: 1;
+
+    .brass {
+        @var: 2;
+        three: @var;//
+        @var: 3;
+    }
+
+    one: @var;
+}

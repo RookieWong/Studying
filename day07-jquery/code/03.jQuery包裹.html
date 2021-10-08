@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <script>
+        //jQuery包裹，当DOM节点加载完毕后执行
+        $(document).ready(function () {
+            console.log($("#box")); //div
+        })
+        //jQuery包裹简写
+        $(function () {
+            console.log($("#box")); //div
+        })
+
+        console.log($("#box")); //空的 当前节点还没有被加载
+
+
+        /* 
+            window.onload:
+                当页面的节点及所有的资源（图片视频音频等等）全部加载完毕后执行
+
+            DOMContentLoaded事件：
+                DOM2级事件，当所有的节点全部加载完成即可执行
+        */
+    </script>
+</head>
+
+<body>
+    <div id="box"></div>
+
+</body>
+
+</html>

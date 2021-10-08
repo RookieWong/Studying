@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      /* 
+            公有属性和方法：
+                设置给实例化对象的属性和方法
+
+            私有属性和方法：
+                在构造函数中 声明的变量和方法
+
+            静态属性和方法：
+                设置给构造函数对象的属性和方法
+
+            特权方法：
+                直接在构造函数中给实例化对象设置的方法
+        
+        
+        */
+
+      //Student是一个构造函数，也就是一个类
+      function Student(name, age, sex) {
+        //公有的属性
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        this.do = function () {
+          console.log("do");
+        };
+        //私有属性
+        var a = 1;
+        //私有方法
+        function fn() {}
+      }
+      //公有的方法
+      Student.prototype.study = function () {
+        //原型方法中的this指向实例化对象
+        console.log("js");
+      };
+
+      //静态属性
+      Student.hello = "world";
+
+      console.log(Student.hello);
+
+      console.log(Array);
+      console.dir(Array); //查看静态方法
+    </script>
+  </body>
+</html>

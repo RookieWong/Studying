@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            函数：
+                - 两重身份：1.函数可以被调用 2.对象（可以扩展属性和方法）
+        
+        
+        */
+
+        //函数声明
+        function fn(a, b) {
+            console.log(a + b);
+        }
+
+        //函数调用
+        fn();
+
+        //把函数当做是一个对象进行扩展属性和方法
+        fn.hello = "world";
+
+
+
+        //函数表达式
+        var fn2 = function () {
+
+        }
+        
+        var fn3 = new Function();
+    </script>
+</body>
+
+</html>

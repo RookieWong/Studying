@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 400px;
+            height: 400px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        /* 
+            节流，让一些高频率触发的事件的核心代码的执行频率低一些，提高浏览器的效率
+            节流：在一段时间内只执行第一次的核心代码
+        
+        */
+        var oBox = document.getElementById('box');
+
+
+        //核心事件处理代码
+        function center(e) {
+            console.log("我是核心代码");
+            //我们希望正常可以获得event事件对象
+            console.log("e", e);
+            //我们期望this指向绑定事件的oBox
+            console.log("this", this);
+        }
+
+        //绑定事件,把节流函数调用写在事件后
+        oBox.onmousemove = throttle(center, 300);
+
+
+        //封装一个节流函数
+        function throttle(fn, time) {
+            //初始化一个上一次的时间
+            var lastTime = 0;
+
+            //throttle返回的函数是真正的事件函数，也就是事件触发的时候一直在调用的是这个函数
+            return function (e) {
+                // console.log("我才是真正的事件函数");
+                //获取当此事件函数的执行时间戳
+                var nowTime = Date.now();
+                //看门口判断 时间如果小于我们传递的间隔时间，则直接退出 不再向下执行
+                if (nowTime - lastTime < time) {
+                    return;
+                }
+                //如果看门口放行了，则当前的时间应该交给lastTime保存
+                lastTime = nowTime;
+
+                //因为当前所在的函数就是真正的事件函数，所以此时的this就是事件的绑定者oBox
+                //因为当前所在的函数就是真正的事件函数，所以当前函数传递的形参的e就是event事件对象
+                //当看门狗放行的时候 去执行核心函数
+                //调用fn并改变fn的this指向
+                fn.call(this, e)
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

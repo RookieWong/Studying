@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+            position: absolute;
+            left: 0;
+            /* transform: translateX(0px) */
+        }
+    </style>
+</head>
+
+<body>
+    <button id="show">show</button>
+    <button id="hide">hide</button>
+    <button id="animate">animate</button>
+    <div id="box"></div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+        $("#show").click(function () {
+            $("#box").stop(true, false).show(1000);
+            // $("#box").slideDown(1000);
+            // $("#box").fadeIn(1000);
+
+
+        })
+        $("#hide").click(function () {
+            $("#box").stop(true, false).hide(1000);
+            // $("#box").slideUp(1000);
+            // $("#box").fadeOut(1000);
+        })
+
+        $("#animate").click(function () {
+            $("#box").animate({
+                width: "400px",
+                // transform: "translateX(1000px)"
+                left: "1000px"
+            }, 1000);
+        })
+    </script>
+</body>
+
+</html>

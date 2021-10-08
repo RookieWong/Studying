@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>多线程执行</title>
+  </head>
+  <body>
+    <button id="btn">结果</button>
+    <script>
+      // 多线程运算
+      let wo = new Worker("work.js");
+
+      // 向分线程发送数据
+      wo.postMessage(100000000);
+
+      // 当分线程执行完成是，则绑定事件开始接受分线程执行的数据，依然使用onmessage接受
+
+      let btn = document.getElementById("btn");
+
+    //   btn.onclick = () => {
+        wo.onmessage = function (e) {
+          console.log("主线程", e.data);
+
+          // 当得到分线程反馈的结果之后，关闭分线程
+          wo.terminate();
+        };
+    //   };
+    </script>
+  </body>
+</html>

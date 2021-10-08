@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            每一个函数都可以使用call，apply，bind方法
+            这三个函数的意义是改变函数调用时的上下文对象，也就是改变函数运行时的this指向
+
+            call：
+                - 在使用一个指定的this值和若干个指定的参数值的前提下调用某个函数或方法
+                - 参数1：执行的this值
+                - 参数2：向被调用的函数传递实参，多个实参依次书写在参数1的后边
+                - call的返回值其实就是被call调用的fn的返回值
+                - call的作用总结：
+                    1.调用了函数
+                    2.改变了函数的this指向
+                    3.返回值是函数的返回值
+        
+        
+        */
+        console.dir(Function.prototype);
+
+        var o = {
+            name: "laowang"
+        }
+
+        function fn(a, b) {
+            console.log("this", this);
+            console.log("a+b", a + b);
+            return "hello";
+        }
+
+        var result = fn.call(o, 1, 2);
+        console.log("result", result);
+
+
+        //练习：让伪数组可以使用forEach
+        var likeArray = {
+            0: "a",
+            1: "b",
+            2: "c",
+            3: "d",
+            length: 4
+        }
+        Array.prototype.forEach.call(likeArray, function (item, index) {
+            console.log(item, index);
+        })
+    </script>
+</body>
+
+</html>

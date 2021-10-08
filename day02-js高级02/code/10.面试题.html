@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fn1() {
+            console.log(1);
+        }
+
+        function fn2() {
+            console.log(2);
+        }
+        fn1.call(fn2); //1
+        /* 
+            call执行的时候为什么能够把调用call的函数执行？因为call中this指向call的函数，当call执行的时候，其实是把call内部的this给调用了
+
+
+            call2执行以后，call1的this指向是fn2了，并且调用了call1
+        
+        
+        */
+        fn1.call.call(fn2); //2
+
+
+
+        fn1.call.call.call(fn2); //2
+        fn1.call.call.call.call(fn2); //2
+        fn1.call.call.call.call.call(fn2); //2
+
+
+
+
+        //call方法中调用了fn
+        /* 
+            call中使用this获取到了fn，在call中this就是这个fn
+
+            相当于在call中this被调用了--->this()
+        */
+        fn.call(o);
+    </script>
+</body>
+
+</html>

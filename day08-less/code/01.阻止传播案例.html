@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            overflow: hidden;
+        }
+
+        #con {
+            width: 100px;
+            height: 100px;
+            background-color: hotpink;
+            margin: 50px;
+        }
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+
+<body>
+    <div id=box>
+        <div id="con"></div>
+    </div>
+
+    <script>
+        $("#box").click(function () {
+            console.log("点了点了");
+        })
+
+        $("#con").mousedown(function (e) {
+            // console.log(e);
+            e.stopPropagation();
+            console.log("鼠标按下了");
+        })
+
+        $("#con").mouseup(function (e) {
+            e.stopPropagation();
+            console.log("鼠标抬起了");
+        })
+        $("#con").click(function (e) {
+            e.stopPropagation();
+        })
+    </script>
+</body>
+
+</html>

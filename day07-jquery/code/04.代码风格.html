@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <div id="box">111</div>
+    <script>
+        /* 
+            隐式迭代
+            链式调用：因为每一个jquery方法都返回一个jquery对象
+            
+        */
+        var oBox = document.getElementById('box')
+        console.log(oBox);
+        //jQuery选择器得到是一个jQuery对象 只有jQuery对象才能调用jQuery的方法
+        console.log($("#box"));
+
+        console.log($("#box").css("background", "red"));
+
+        //js对象转jQuery对象,添加一个包裹即可
+        // $(oBox).css("background", "red");
+
+
+        //jQuery对象转js对象，使用下标或者[]即可
+        // $("#box")[0].style.background = "red";
+        // $("#box").get(0).style.background = "red";
+    </script>
+</body>
+
+</html>

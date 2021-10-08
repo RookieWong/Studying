@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>拖拽面向对象方法</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        position: fixed;
+        left: 0;
+        top: 0;
+      }
+
+      #box1 {
+        background-color: rgb(0, 255, 55);
+      }
+
+      #box2 {
+        background-color: rgb(10, 151, 85);
+      }
+
+      #box3 {
+        background-color: rgb(0, 110, 255);
+      }
+
+      #box4 {
+        background-color: rgb(255, 0, 170);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+    <div id="box4"></div>
+    <script>
+      // 创建构造函数
+      // 创建实例，让实例对象拥有拖拽效果
+      function Drag(id) {
+        // this指向实例化对象
+        // oBox保存实例化对象的节点
+        this.oBox = document.getElementById(id);
+        // 添加鼠标按下event
+        this.oBox.onmousedown = (e) => {
+          //这里箭头函数的this指向实例化对象Drag {oBox: div#box4}
+          //   使用函数，this指向调用者
+          // 把mousedown以后执行的核心代码放在原型对象上
+          console.log(this);
+            this.down(e);
+        };
+      }
+
+      Drag.prototype.down = function (e) {
+        //   箭头函数这里的this指向window
+        //   使用函数，this指向Drag {oBox: div#box4}
+        e.preventDefault();
+        console.log("Drag.prototype.down", this); //Drag {oBox: div#box4}
+        // console.log(outThis);
+
+        // 添加鼠标按下event
+        console.log(1);
+        console.log("2down");
+        //这里函数的this指向实例化对象Drag {oBox: div#box4}
+        // 用对象保存鼠标到元素边缘距离
+        let mouseToEle = {
+          left: e.offsetX,
+          top: e.offsetY,
+        };
+        // 添加鼠标移动event
+        document.onmousemove = (e) => {
+          console.log("3move");
+          // 获取鼠标到视口的距离
+          let mouseToView = {
+            left: e.clientX,
+            top: e.clientY,
+          };
+          //计算鼠标移动结果
+          let boxLocation = {
+            x: mouseToView.left - mouseToEle.left,
+            y: mouseToView.top - mouseToEle.top,
+          };
+          //   给元素的位置赋值
+          this.oBox.style.left = boxLocation.x + "px";
+          this.oBox.style.top = boxLocation.y + "px";
+
+          // 鼠标up时注销down, up和move的event
+          document.onmouseup = () => {
+            document.onmousedown = null;
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+        };
+      };
+
+      //   Drag.prototype.move = function (e) {};
+
+      new Drag("box1");
+      new Drag("box2");
+      new Drag("box3");
+      let b1 = new Drag("box4");
+    </script>
+  </body>
+</html>

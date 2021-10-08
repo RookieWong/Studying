@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            手写bind：
+                bind：做了什么事情？
+                    - 返回了和原函数一模一样的函数，但是this已经被改变为bind指定的对象了
+
+                    - 手写的思路：
+                        bind返回一个函数，当调用bind返回的函数的时候，让fn执行，并把fn的this指向bind的指定的对象
+        
+        */
+
+        Function.prototype.myBind = function () {
+            //这里的this指向调用myBind的fn函数
+            //用_this保存当前的this，供其他地方使用
+            var _this = this;
+
+            //获取用户指定的对象 保存当前函数的arguments
+            var arg = Array.from(arguments);
+
+            return function () {
+                //当返回的函数调用的时候，调用fn，并改变this指向
+                //fn就是调用myBind的函数 也就是_this
+                //传入得到给fn传递的实参
+                return _this.apply(arg[0], arg.slice(1))
+            }
+        }
+
+        function fn(a, b) {
+            console.log("this", this);
+            console.log(a + b);
+            return 'hello'
+        }
+        var newFn = fn.myBind({
+            name: "laowang"
+        }, 1, 2)
+
+        console.log(newFn);
+        //手写思路，当newFn调用的时候，调用fn，并改变this指向
+        var result = newFn();
+        console.log("result", result);
+    </script>
+</body>
+
+</html>

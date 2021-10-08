@@ -1,0 +1,207 @@
+// 侧边栏
+.toolBar {
+  height: 100%;
+  width: 300px;
+  background-color: #7a6e6e;
+  position: fixed;
+  top: 0;
+  right: -294px;
+  transition: all 0.5s linear;
+  z-index: 1;
+
+  .content {
+    width: 294px;
+    height: 100%;
+    position: relative;
+    right: -6px;
+    background-color: bisque;
+    z-index: 5;
+  }
+
+  .menu {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    left: -29px;
+    top: 0px;
+    background: rgb(250, 95, 211) url(../images/list.png);
+    //复习点
+    background-size: contain;
+  }
+
+  .navList {
+    width: 35px;
+    position: absolute;
+    z-index: 2;
+    left: -29px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    li {
+      width: 35px;
+      height: 35px;
+      margin: 3px 0px;
+      position: relative;
+
+      &:hover p {
+        left: -62px;
+      }
+
+      i {
+        display: block;
+        width: 35px;
+        height: 35px;
+        z-index: 3;
+        position: relative;
+      }
+
+      p {
+        width: 62px;
+        height: 35px;
+        left: 35px;
+        top: 0;
+        position: absolute;
+        background-color: red;
+        line-height: 35px;
+        color: #fff;
+        text-align: center;
+        //   复习点
+        transition: all 0.3s linear 0.2s;
+      }
+      z-index: 1;
+
+      &:nth-child(1) {
+        i {
+          background: url(../images//toolbars.png) -87px -174px no-repeat;
+        }
+      }
+
+      &:nth-child(2) {
+        i {
+          background: #7a6e6e url(../images//toolbars.png) -50px 0px no-repeat;
+        }
+      }
+
+      &:nth-child(3) {
+        i {
+          background: #7a6e6e url(../images//toolbars.png) -50px -100px
+            no-repeat;
+        }
+      }
+
+      &:nth-child(4) {
+        i {
+          background: #7a6e6e url(../images//toolbars.png) -190px -150px
+            no-repeat;
+        }
+      }
+
+      &:nth-child(5) {
+        i {
+          background: #7a6e6e url(../images//toolbars.png) -50px -150px
+            no-repeat;
+        }
+      }
+
+      &:nth-child(6) {
+        i {
+          background: #7a6e6e url(../images//toolbars.png) -50px -250px
+            no-repeat;
+        }
+      }
+    }
+  }
+
+  .back {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    left: -29px;
+    bottom: 0px;
+    background: #7a6e6e url(../images/toolbars.png) -50px -250px no-repeat;
+    background-size: contain;
+  }
+}
+
+// 头部区域
+.header {
+  .headerTop_out {
+    width: 100%;
+    background-color: #eaeaea;
+
+    .headerTop {
+      width: 1200px;
+      margin: 0 auto;
+      height: 30px;
+      //   复习点
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .headerTop_left {
+      display: flex;
+
+      p {
+        margin-right: 10px;
+      }
+
+      a + a {
+        border-left: 1px solid #3c3c3c;
+        padding-left: 5px;
+      }
+    }
+
+    .headerTop_right {
+      a {
+        margin-right: 5px;
+
+        // 复习点
+        & + a {
+          border-left: 1px solid #3c3c3c;
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+
+  .headerBottom {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+
+    .logo {
+      img {
+        width: 175px;
+        height: 56px;
+        display: block;
+        margin: 25px 45px;
+      }
+    }
+
+    .header_search {
+      margin-top: 35px;
+      display: flex;
+
+      input {
+        box-sizing: border-box;
+        width: 490px;
+        height: 32px;
+        padding: 0 4px;
+        border: 2px solid #ea4a36;
+        outline: none;
+      }
+
+      button {
+          width: 68px;
+          height: 32px;
+          background-color: #ea4a36;
+          color: #fff;
+          outline: none;
+          border: none;
+          cursor: pointer;
+      }
+    }
+  }
+}

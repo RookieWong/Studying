@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 2000px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn1">单线程运算</button>
+    <button id="btn2">多线程运算</button>
+    <button id="btn3">判断是否假死</button>
+
+    <script>
+        var oBtn1 = document.getElementById('btn1')
+        var oBtn2 = document.getElementById('btn2')
+
+        oBtn1.onclick = function () {
+            var num = 0;
+            for (var i = 0; i < 10000000000; i++) {
+                num += Math.sqrt(i);
+            }
+        }
+
+
+        //多线程运算
+        /* 
+            缺点：  
+                worker内代码不能操作DOM(更新UI)
+                不能跨域加载JS
+        */
+        oBtn2.onclick = function () {
+            //开启新的分线程 分线程同步开始运行,返回值代表这个分线程
+            var ww = new Worker("worker.js");
+
+            //向分线程发送数据 使用postMessage方法
+            ww.postMessage(100000000)
+
+            //当分线程执行完成，则绑定事件开始接收分线程执行的数据，依然使用onmessage事件接收
+            ww.onmessage = function (e) {
+                //数据在event事件对象的data属性上
+                alert(e.data)
+
+                //当得到分线程反馈的结果之后，关闭分线程
+                ww.terminate();
+            }
+
+
+
+        }
+    </script>
+</body>
+
+</html>

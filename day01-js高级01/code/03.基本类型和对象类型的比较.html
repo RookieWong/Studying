@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            基本类型和对象类型比较：
+                - 基本类型和对象类型是通过储存方式进行划分的
+                - 基本类型：
+                    - 基本类型有number boolean string null undefined
+                    - 基本类型存储在栈内存中
+                    - 基本类型值是不可变的，当一个基本类型调用某个方法的时候，不会改变这个值，而一般是返回一个新值，注意,不可变并不是不可替换
+                    - 基本类型值不能扩展属性和方法，否则获取不到（基本包装类型的特性）
+                    - 基本类型值的比较是值的比较
+                    - 基本类型的赋值是值的赋值
+
+
+                - 对象类型：
+                    - 对象类型是Object,其中包含了object、array、function、regExp、date等等
+                    - 对象类型存储在堆内存中，当前对象的引用地址保存在栈中，我们只能通过栈中的地址访问到堆中的对象
+                    - 对象类型是可变的
+                    - 对象类型是可以扩展属性和方法的
+                    - 对象类型的比较是引用地址的比较
+                    - 对象类型的赋值是地址的赋值
+        
+        */
+
+        //基本类型值是不可变的
+        var a = 1;
+        a = 2;
+        var str = "hello";
+        var newStr = str.toUpperCase();
+
+        // 对象类型是可变的
+        var arr1 = [1, 2, 3];
+        arr1.push(4); //改变了原数组 返回了新数组的长度
+
+        //基本类型值不能扩展属性和方法
+        var str2 = "world";
+        str2.go = "back";
+        /* 
+            伪代码展示：
+                当你给str2扩展go属性的时候，首先获取到str2的包装对象
+                var _str2 = new String(str2);
+                //给包装对象扩展属性
+                _str2.go = "back";
+                //删除包装对象
+                _str2 = null
+        
+        */
+        console.log("str2.go", str2.go);
+
+
+        //test
+        var arr2 = [1, 2, {}, 3]
+        var o = {};
+        var re1 = arr2.indexOf(o);
+        console.log("re1", re1); //-1
+
+
+        //地址的赋值
+        var arr1 = [1, 2, 3];
+        var arr3 = arr1;
+        arr3.push(4);
+        console.log("arr1", arr1); //[1,2,3,4]
+    </script>
+</body>
+
+</html>

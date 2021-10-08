@@ -1,0 +1,49 @@
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+#outer {
+  background-color: #ccc;
+}
+.header-outer {
+  width: 100%;
+  border-bottom: 3px solid #123ab1;
+}
+.header {
+  width: 1000px;
+  margin: 0 auto;
+  display: flex;
+}
+.header .left {
+  width: 200px;
+  height: 100px;
+}
+.header .left:after {
+  content: "";
+  display: block;
+}
+.header .left .img {
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+.header nav {
+  height: 40px;
+}
+.header nav ul {
+  display: flex;
+}
+.header nav ul li {
+  width: 50px;
+  background-color: red;
+}
+.header nav ul li:nth-child(1) {
+  background-color: aqua;
+}
+.header nav ul li a {
+  font-size: 12px;
+}
+.header nav ul li a:hover {
+  background-color: red;
+}

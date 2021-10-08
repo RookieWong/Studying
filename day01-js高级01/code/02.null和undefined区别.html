@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            null和undefined区别：
+                - null出现的场景
+                    1.变量需要被初始化，但是暂时不赋值，可以赋值为null
+                    2.原型链的终点为null(避免原型链循环)
+                    3.函数需要某个参数，但是不想传递的时候，可以传递一个null
+                    4.把一个对象变成垃圾对象（将保存对象地址的变量赋值为null）
+
+                - undefined出现的场景
+                    1.当变量没有赋值的时候
+                    2.函数没有return值的时候
+                    3.函数没有传参，对应的形参就是undefined
+                    4.获取对象没有的属性值的时候
+         */
+
+
+        //null的场景
+        //  1.变量需要被初始化，但是暂时不赋值，可以赋值为null
+        var timer = null;
+
+        div1.onclick = function () {
+            timer = setInterval(function () {
+                alert(1)
+            })
+        }
+
+        div2.onclick = function () {
+            clearInterval(timer)
+        }
+
+
+        //3.函数需要某个参数，但是不想传递的时候，可以传递一个null
+        function fn(a, b, c) {
+            console.log(a, b, c);
+        }
+        fn(1, null, 2)
+
+
+        //把原来fn保存的地址指向的对象变成垃圾对象
+        fn = null;
+
+        //undefined的场景
+        // 1.当变量没有赋值的时候
+        var a;
+        // 2.函数没有return值的时候
+        function fn1(a) {
+            console.log(a);
+        }
+        console.log(fn1())
+        //3.函数没有传参，对应的形参就是undefined
+
+        // 4.获取对象没有的属性值的时候
+        var o = {}
+        console.log(o.a);
+    </script>
+</body>
+
+</html>

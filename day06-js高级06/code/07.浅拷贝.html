@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var o1 = {
+            name: "laowang",
+            age: 18,
+            score: [100, 90, 80],
+            do: function () {}
+        }
+
+        //把o1拷贝一份
+        var o2 = {};
+
+        //拷贝对象的时候，只拷贝的一层，被称作为浅拷贝
+
+        //分别看o1中有哪些属性，给o2扩展一份
+        for (var key in o1) {
+            //得到每一个key 把key设置给o2
+            o2[key] = o1[key]
+        }
+
+        console.log(o2, o1, o2 === o1);
+        //浅拷贝后，内部属性如果是一个对象类型，则是同一个对象
+        console.log(o2.score === o1.score);
+    </script>
+</body>
+
+</html>
